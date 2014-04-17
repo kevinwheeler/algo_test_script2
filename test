@@ -2,7 +2,7 @@
 
 cd ./testfiles/
 X=501
-while [ $X -le 504 ]
+while [ $X -le 516 ]
 do
   wget -N  http://www.cs.utexas.edu/~geocklam/CS331/assignment5/input$X.txt
   wget -N http://www.cs.utexas.edu/~geocklam/CS331/assignment5/output$X.txt
@@ -18,7 +18,7 @@ cp ./testfiles/output1.txt output1.txt
 cp ./testfiles/output1_alternative.txt output1_alternative.txt
 
 X=501
-while [ $X -le 504 ]
+while [ $X -le 516 ]
 do
   cp ./testfiles/input$X.txt input$X.txt
   cp ./testfiles/output$X.txt output$X.txt
