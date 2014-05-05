@@ -1,24 +1,35 @@
 #!/bin/bash
 
 cd ./testfiles/
+
+#get inputs and outputs 501 through 528
 X=501
-while [ $X -le 516 ]
+while [ $X -le 528 ]
 do
   wget -N  http://www.cs.utexas.edu/~geocklam/CS331/assignment5/input$X.txt
   wget -N http://www.cs.utexas.edu/~geocklam/CS331/assignment5/output$X.txt
   X=$((X+1))
 done
 
+#get inputs and outputs 601 through 615
+X=601
+while [ $X -le 615 ]
+do
+  wget -N http://www.cs.utexas.edu/~geocklam/CS331/assignment6/input$X.txt 
+  wget -N http://www.cs.utexas.edu/~geocklam/CS331/assignment6/output$X.txt 
+  X=$((X+1))
+done
+
+
 cd ..
 echo "Now testing files  ... "
 
 ./build
-cp ./testfiles/input1.txt input1.txt
-cp ./testfiles/output1.txt output1.txt
-cp ./testfiles/output1_alternative.txt output1_alternative.txt
 
+
+#run tests 501 through 528
 X=501
-while [ $X -le 516 ]
+while [ $X -le 528 ]
 do
   cp ./testfiles/input$X.txt input$X.txt
   cp ./testfiles/output$X.txt output$X.txt
@@ -37,9 +48,39 @@ do
   
   echo "============================="
   
+  
   rm o$X.txt
   rm output$X.txt
   rm input$X.txt
   X=$((X+1))
   
+done
+
+#run tests 601 through 615
+X=601
+while [ $X -le 615 ]
+do
+  cp ./testfiles/input$X.txt input$X.txt
+  cp ./testfiles/output$X.txt output$X.txt
+  ./run input$X.txt o$X.txt
+
+
+  diff -w o$X.txt output$X.txt > diff$X.txt
+  echo "Test case $X: input$X.txt"
+  if [ -s "diff$X.txt" ];
+  then
+  echo -e "${red}Failed"
+  else
+  echo -e "${green}PASSED"
+  rm diff$X.txt
+  fi
+
+  echo "============================="
+
+
+  rm o$X.txt
+  rm output$X.txt
+  rm input$X.txt
+  X=$((X+1))
+
 done
